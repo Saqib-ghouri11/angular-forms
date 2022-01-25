@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  options=['angular','react','vue']
   title = 'angular-forms';
 }
