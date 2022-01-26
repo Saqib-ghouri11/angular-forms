@@ -9,8 +9,14 @@
 
     <div class="form-group">
       <label>Name</label>
-      <input type="text" class="form-control" name="name" [(ngModel)]="userData.name">
+       <!-- here we have applied validation control by observing the state change of the form control field, along with visual feedback -->
+      <input type="text" #name="ngModel" class="form-control" name="name" 
+      [class.is-invalid]="name.invalid && name.touched"
+      required [(ngModel)]="userData.name">
+       <!-- displaying the error messages as well with visual feedback -->
+       <small class="text-danger" [class.d-none]="name.valid || name.untouched">name is required</small>
     </div>
+    {{name.valid}}
 
     <div class="form-group">
       <label>Email</label>
@@ -19,7 +25,16 @@
 
     <div class="form-group">
       <label>Phone</label>
-      <input type="tel" class="form-control" name="phone" [(ngModel)]="userData.phone">
+      <!-- here we have applied validation control by observing the state change of the form control field, along with visual feedback -->
+      <input type="tel" class="form-control" name="phone" #phone="ngModel"
+      pattern="^\d{10}$" required
+      [class.is-invalid]="phone.invalid && phone.touched"
+      [(ngModel)]="userData.phone">
+      <!-- displaying multiple conditioned error message with visual feedback -->
+     <div *ngIf="phone.errors && (phone.invalid || phone.touched)">
+        <small class="text-danger" *ngIf="phone.errors?.['pattern']">Phone number must be of 10 digits</small>
+        <small class="text-danger" *ngIf="phone.errors?.['required']">Phone number is required</small>
+     </div>
     </div>
 
     <div ngModelGroup="address" >
