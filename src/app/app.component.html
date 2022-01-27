@@ -1,24 +1,47 @@
 <div class="container-fluid">
   <h1>Registration Form</h1>
- <form  >
-
+  {{reactiveFormModel.value | json}}
+ <form  [formGroup]="reactiveFormModel">
+ 
   <div  class="form-group">
     <label >Username</label>
-    <input type="text" name="username" class="form-control">
+    <input type="text" name="username" class="form-control" formControlName="username">
   </div>
 
   <div  class="form-group">
     <label >Password</label>
-    <input type="password" name="username" class="form-control">
+    <input type="password" name="password" class="form-control" formControlName="password">
   </div>
 
   <div  class="form-group">
     <label >Confirm Password</label>
-    <input type="password" name="username" class="form-control">
+    <input type="password" name="confirmPassword" class="form-control" formControlName="confirmPassword">
+  </div>
+
+  <div class="form-group" formGroupName="address">
+
+    <div  class="form-group">
+      <label >City</label>
+      <input type="text" name="city" class="form-control" formControlName="city">
+    </div>
+
+    <div  class="form-group">
+      <label >State</label>
+      <input type="text" name="state" class="form-control" formControlName="state">
+    </div>
+
+    <div  class="form-group">
+      <label >Postal Code</label>
+      <input type="text" name="postalCode" class="form-control" formControlName="postalCode">
+    </div>
+
   </div>
 
   <button class="btn btn-primary" type="submit">Register</button>
+  <button class="btn btn-secondary ml-2" type="button" (click)="loadData()">Load API Data</button>
+  
 
  </form>
+ 
 </div>
 
