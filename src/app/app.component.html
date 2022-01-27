@@ -1,7 +1,7 @@
 
 <div class="container-fluid">
   <h1>Template Driven Form</h1>
-  <form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)" novalidate>
 
     {{userForm.value | json}} <hr/>
 

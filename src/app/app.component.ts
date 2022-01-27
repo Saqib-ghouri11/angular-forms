@@ -25,12 +25,13 @@ constructor(private httpService:HttpService){}
     }
   }
 
-  onSubmit(){
+  onSubmit(userFrm:any){
+    console.log(userFrm);
 
-    this.httpService.postService('http://localhost:8000/post-here',this.userData).subscribe(
-      data=> console.log('success',data),
-      error=> this.responseError=error.statusText,
-    );
+    // this.httpService.postService('http://localhost:8000/post-here',this.userData).subscribe(
+    //   data=> console.log('success',data),
+    //   error=> this.responseError=error.statusText,
+    // );
 
   }
 
