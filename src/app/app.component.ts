@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +9,13 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class AppComponent {
   constructor(private fb:FormBuilder){}
   title = 'reactive-forms';
+  //defining getters and setters of the form controls
+
 //here we will be using form builder service instead of formGroup in order to have efficient code.
 reactiveFormModel= this.fb.group(
 {
-  username:['SaqibAli08'],
+  //applying validation using second element of the formControl array
+  username:['SaqibAli08',[Validators.required,Validators.minLength(3)]],
   password:[''],
   confirmPassword:[''],
   address:this.fb.group({
@@ -32,6 +35,7 @@ reactiveFormModel= this.fb.group(
   //     postalCode:new FormControl(''),
   //   }),
   // });
+  get username(){return this.reactiveFormModel.get('username');}
 
   loadData(){
     //here setValues is restricted to set all field. 
