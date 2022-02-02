@@ -6,39 +6,66 @@
   <div  class="form-group">
     <label >Username</label>
     <input type="text" name="username" class="form-control" formControlName="username"
-    [class.is-invalid]="username?.invalid && username?.touched"
+    [class.is-invalid]="getUsername?.invalid && getUsername?.touched"
     >
-    <div [class.d-none]="username?.valid && username?.untouched" *ngIf="username?.invalid && username?.touched">
-      <small class="text-danger" *ngIf="username?.errors?.['required']">Username is required</small>
-      <small class="text-danger" *ngIf="username?.errors?.['minlength']">min length must be of 3 characters</small>
+    <div [class.d-none]="getUsername?.valid && getUsername?.untouched" *ngIf="getUsername?.invalid && getUsername?.touched">
+      <small class="text-danger" *ngIf="getUsername?.errors?.['required']">Username is required</small>
+      <small class="text-danger" *ngIf="getUsername?.errors?.['minlength']">min length must be of 3 characters</small>
     </div>
   </div>
 
   <div  class="form-group">
     <label >Password</label>
-    <input type="password" name="password" class="form-control" formControlName="password">
+    <input type="password" name="password" class="form-control" formControlName="password"
+    [class.is-invalid]="getPassword?.invalid && getPassword?.touched"
+    >
+    <div [class.d-none]="getPassword?.valid && getPassword?.untouched" *ngIf="getPassword?.invalid && getPassword?.touched">
+      <small class="text-danger" *ngIf="getPassword?.errors?.['required']">Password is required</small>
+      <small class="text-danger" *ngIf="getPassword?.errors?.['minlength']">min length must be of 8 characters</small>
+    </div>
   </div>
 
   <div  class="form-group">
     <label >Confirm Password</label>
-    <input type="password" name="confirmPassword" class="form-control" formControlName="confirmPassword">
+    <input type="password" name="confirmPassword" class="form-control" formControlName="confirmPassword"
+    [class.is-invalid]="getConfirmPassword?.invalid && getConfirmPassword?.touched"
+    >
+    <div [class.d-none]="getConfirmPassword?.valid && getConfirmPassword?.untouched" *ngIf="getConfirmPassword?.invalid && getConfirmPassword?.touched">
+      <small class="text-danger" *ngIf="getConfirmPassword?.errors?.['required']">Password is required</small>
+      <small class="text-danger" *ngIf="getConfirmPassword?.errors?.['minlength']">min length must be of 8 characters</small>
+    </div>
   </div>
 
   <div class="form-group" formGroupName="address">
 
     <div  class="form-group">
       <label >City</label>
-      <input type="text" name="city" class="form-control" formControlName="city">
+      <input type="text" name="city" class="form-control" formControlName="city"
+      [class.is-invalid]="getAddress?.get('city')?.invalid && getAddress?.get('city')?.touched"
+      >
+      <div [class.d-none]="getAddress?.get('city')?.valid && getAddress?.get('city')?.untouched" *ngIf="getAddress?.get('city')?.invalid && getAddress?.get('city')?.touched">
+        <small class="text-danger" *ngIf="getAddress?.get('city')?.errors?.['required']">City is required</small>
+      </div>
     </div>
 
     <div  class="form-group">
       <label >State</label>
-      <input type="text" name="state" class="form-control" formControlName="state">
+      <input type="text" name="state" class="form-control" formControlName="state"
+      [class.is-invalid]="getAddress?.get('state')?.invalid && getAddress?.get('state')?.touched"
+      >
+      <div [class.d-none]="getAddress?.get('state')?.valid && getAddress?.get('state')?.untouched" *ngIf="getAddress?.get('state')?.invalid && getAddress?.get('state')?.touched">
+        <small class="text-danger" *ngIf="getAddress?.get('state')?.errors?.['required']">state is required</small>
+      </div>
     </div>
 
     <div  class="form-group">
       <label >Postal Code</label>
-      <input type="text" name="postalCode" class="form-control" formControlName="postalCode">
+      <input type="text" name="postalCode" class="form-control" formControlName="postalCode"
+      [class.is-invalid]="getAddress?.get('postalCode')?.invalid && getAddress?.get('postalCode')?.touched"
+      >
+      <div [class.d-none]="getAddress?.get('postalCode')?.valid && getAddress?.get('postalCode')?.untouched" *ngIf="getAddress?.get('postalCode')?.invalid && getAddress?.get('postalCode')?.touched">
+        <small class="text-danger" *ngIf="getAddress?.get('postalCode')?.errors?.['required']">postal code is required</small>
+      </div>
     </div>
 
   </div>

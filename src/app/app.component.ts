@@ -16,12 +16,12 @@ reactiveFormModel= this.fb.group(
 {
   //applying validation using second element of the formControl array
   username:['SaqibAli08',[Validators.required,Validators.minLength(3)]],
-  password:[''],
-  confirmPassword:[''],
+  password:['',[Validators.required,Validators.minLength(8)]],
+  confirmPassword:['',[Validators.required,Validators.minLength(8)]],
   address:this.fb.group({
-    city:[''],
-    state:[''],
-    postalCode:[''],
+    city:['',Validators.required],
+    state:['',Validators.required],
+    postalCode:['',Validators.required],
   })
 }
 );
@@ -35,7 +35,11 @@ reactiveFormModel= this.fb.group(
   //     postalCode:new FormControl(''),
   //   }),
   // });
-  get username(){return this.reactiveFormModel.get('username');}
+  get getUsername(){return this.reactiveFormModel.get('username');}
+  get getPassword(){return this.reactiveFormModel.get('password');}
+  get getConfirmPassword(){return this.reactiveFormModel.get('confirmPassword');}
+  get getAddress(){return this.reactiveFormModel.get('address');}
+  
 
   loadData(){
     //here setValues is restricted to set all field. 
