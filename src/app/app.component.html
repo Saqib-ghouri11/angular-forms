@@ -41,8 +41,12 @@
 
   <div class="form-group">
     <label  class="form-group-label">Email</label>
+    <button class="btn btn-secondary btn-sm ml-2" (click)="addEmailField()">add e-mail</button>
     <input type="email" class="form-control" formControlName="email" name="email"  [class.is-invalid]="getEmail?.invalid">
     <small class="text-danger" *ngIf="getEmail?.errors?.['required']">Email is required</small>
+    <div formArrayName='alternateEmail' *ngFor="let item of getAlternateEmailArray.controls; let i=index">
+      <input  type="email" class="form-control my-1" [formControlName]="i"]>
+    </div>
   </div>
 
   <div class="form-check">

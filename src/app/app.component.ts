@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {  FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordValidator } from './custom/password-validator';
 import {forbiddenNameValidator} from './custom/user-validator'
 
@@ -24,6 +24,10 @@ export class AppComponent implements OnInit {
   //defining getters and setters of the form controls
   //here we will be using form builder service instead of formGroup in order to have efficient code.
   reactiveFormModel!: FormGroup;
+
+
+
+ 
 // reactiveFormModel= this.fb.group(
 // {
 //   //applying validation using second element of the formControl array
@@ -53,9 +57,15 @@ export class AppComponent implements OnInit {
   get getAddress(){return this.reactiveFormModel.get('address');}
   get getEmail(){return this.reactiveFormModel.get('email');}
   get getSubscribtion(){return this.reactiveFormModel.get('subscribe');}
-  
+  //step two of creating dynamic form field
+  get getAlternateEmailArray(){
+    return this.reactiveFormModel.get('alternateEmail') as FormArray;
+  }
 
-  
+  //step three of creating dynamic form field
+  addEmailField(){
+    this.getAlternateEmailArray.push(this.fb.control(''));
+  }
 
   loadData(){
     //here setValues is restricted to set all field. 
@@ -84,6 +94,8 @@ export class AppComponent implements OnInit {
           city:['',Validators.required],
           state:['',Validators.required],
           postalCode:['',Validators.required],
+          //step one of creating dynamic form field
+          alternateEmail:this.fb.array([]),
         })
       },{validator: passwordValidator}
       );
@@ -99,6 +111,7 @@ export class AppComponent implements OnInit {
           email?.updateValueAndValidity();
 
       });
+
   }
   
 }
