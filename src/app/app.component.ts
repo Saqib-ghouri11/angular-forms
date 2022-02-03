@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Form, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { passwordValidator } from './custom/password-validator';
 import {forbiddenNameValidator} from './custom/user-validator'
 
@@ -8,25 +8,35 @@ import {forbiddenNameValidator} from './custom/user-validator'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  constructor(private fb:FormBuilder){}
+export class AppComponent implements OnInit {
+  constructor(private fb:FormBuilder){
+    
+  }
+ 
   title = 'reactive-forms';
   //defining getters and setters of the form controls
 
 //here we will be using form builder service instead of formGroup in order to have efficient code.
-reactiveFormModel= this.fb.group(
-{
-  //applying validation using second element of the formControl array
-  username:['SaqibAli08',[Validators.required,Validators.minLength(3),forbiddenNameValidator(/admin/)]],
-  password:['',[Validators.required,Validators.minLength(8)]],
-  confirmPassword:['',[Validators.required,Validators.minLength(8)]],
-  address:this.fb.group({
-    city:['',Validators.required],
-    state:['',Validators.required],
-    postalCode:['',Validators.required],
-  })
-},{validator: passwordValidator}
-);
+  //defining getters and setters of the form controls
+  //here we will be using form builder service instead of formGroup in order to have efficient code.
+  //defining getters and setters of the form controls
+  //here we will be using form builder service instead of formGroup in order to have efficient code.
+  //defining getters and setters of the form controls
+  //here we will be using form builder service instead of formGroup in order to have efficient code.
+  reactiveFormModel!: FormGroup;
+// reactiveFormModel= this.fb.group(
+// {
+//   //applying validation using second element of the formControl array
+//   username:['SaqibAli08',[Validators.required,Validators.minLength(3),forbiddenNameValidator(/admin/)]],
+//   password:['',[Validators.required,Validators.minLength(8)]],
+//   confirmPassword:['',[Validators.required,Validators.minLength(8)]],
+//   address:this.fb.group({
+//     city:['',Validators.required],
+//     state:['',Validators.required],
+//     postalCode:['',Validators.required],
+//   })
+// },{validator: passwordValidator}
+// );
   // reactiveFormModel = new FormGroup({
   //   username:new FormControl('SaqibAli08'),
   //   password:new FormControl(''),
@@ -41,6 +51,10 @@ reactiveFormModel= this.fb.group(
   get getPassword(){return this.reactiveFormModel.get('password');}
   get getConfirmPassword(){return this.reactiveFormModel.get('confirmPassword');}
   get getAddress(){return this.reactiveFormModel.get('address');}
+  get getEmail(){return this.reactiveFormModel.get('email');}
+  get getSubscribtion(){return this.reactiveFormModel.get('subscribe');}
+  
+
   
 
   loadData(){
@@ -57,5 +71,34 @@ reactiveFormModel= this.fb.group(
       }
     });
   }
+  ngOnInit(): void {
+    this.reactiveFormModel= this.fb.group(
+      {
+        //applying validation using second element of the formControl array
+        username:['SaqibAli08',[Validators.required,Validators.minLength(3),forbiddenNameValidator(/admin/)]],
+        password:['',[Validators.required,Validators.minLength(8)]],
+        confirmPassword:['',[Validators.required,Validators.minLength(8)]],
+        email:[''],
+        subscribe:[false],
+        address:this.fb.group({
+          city:['',Validators.required],
+          state:['',Validators.required],
+          postalCode:['',Validators.required],
+        })
+      },{validator: passwordValidator}
+      );
+      //here we are creating conditional validations
+      this.reactiveFormModel.get('subscribe')?.valueChanges.subscribe(checkValue=>{
+        const email=this.reactiveFormModel.get('email');
+          if(checkValue){
+            email?.setValidators(Validators.required);
+          }
+          else if(!checkValue){
+            email?.clearValidators();
+          }
+          email?.updateValueAndValidity();
 
+      });
+  }
+  
 }
