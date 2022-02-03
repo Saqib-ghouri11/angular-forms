@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { passwordValidator } from './custom/password-validator';
+import {forbiddenNameValidator} from './custom/user-validator'
 
 @Component({
   selector: 'app-root',
@@ -15,7 +17,7 @@ export class AppComponent {
 reactiveFormModel= this.fb.group(
 {
   //applying validation using second element of the formControl array
-  username:['SaqibAli08',[Validators.required,Validators.minLength(3)]],
+  username:['SaqibAli08',[Validators.required,Validators.minLength(3),forbiddenNameValidator(/admin/)]],
   password:['',[Validators.required,Validators.minLength(8)]],
   confirmPassword:['',[Validators.required,Validators.minLength(8)]],
   address:this.fb.group({
@@ -23,7 +25,7 @@ reactiveFormModel= this.fb.group(
     state:['',Validators.required],
     postalCode:['',Validators.required],
   })
-}
+},{validator: passwordValidator}
 );
   // reactiveFormModel = new FormGroup({
   //   username:new FormControl('SaqibAli08'),

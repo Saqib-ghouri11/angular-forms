@@ -6,33 +6,36 @@
   <div  class="form-group">
     <label >Username</label>
     <input type="text" name="username" class="form-control" formControlName="username"
-    [class.is-invalid]="getUsername?.invalid && getUsername?.touched"
+    [class.is-invalid]="getUsername?.invalid && getUsername?.touched "
     >
     <div [class.d-none]="getUsername?.valid && getUsername?.untouched" *ngIf="getUsername?.invalid && getUsername?.touched">
       <small class="text-danger" *ngIf="getUsername?.errors?.['required']">Username is required</small>
       <small class="text-danger" *ngIf="getUsername?.errors?.['minlength']">min length must be of 3 characters</small>
+      <small class="text-danger" *ngIf="getUsername?.errors?.['forbiddenName']">{{getUsername?.errors?.['forbiddenName'].value}} username not allowed </small>
     </div>
   </div>
 
   <div  class="form-group">
     <label >Password</label>
     <input type="password" name="password" class="form-control" formControlName="password"
-    [class.is-invalid]="getPassword?.invalid && getPassword?.touched"
+    [class.is-invalid]="getPassword?.invalid && getPassword?.touched || reactiveFormModel.errors?.['misMatch']"
     >
-    <div [class.d-none]="getPassword?.valid && getPassword?.untouched" *ngIf="getPassword?.invalid && getPassword?.touched">
+    <div  *ngIf="getPassword?.invalid && getPassword?.touched || reactiveFormModel.errors?.['misMatch']">
       <small class="text-danger" *ngIf="getPassword?.errors?.['required']">Password is required</small>
       <small class="text-danger" *ngIf="getPassword?.errors?.['minlength']">min length must be of 8 characters</small>
+      <small class="text-danger" *ngIf="reactiveFormModel?.errors?.['misMatch']">Passwords do not match</small>
     </div>
   </div>
 
   <div  class="form-group">
     <label >Confirm Password</label>
     <input type="password" name="confirmPassword" class="form-control" formControlName="confirmPassword"
-    [class.is-invalid]="getConfirmPassword?.invalid && getConfirmPassword?.touched"
+    [class.is-invalid]="getConfirmPassword?.invalid && getConfirmPassword?.touched || reactiveFormModel.errors?.['misMatch']"
     >
-    <div [class.d-none]="getConfirmPassword?.valid && getConfirmPassword?.untouched" *ngIf="getConfirmPassword?.invalid && getConfirmPassword?.touched">
+    <div  *ngIf="getConfirmPassword?.invalid && getConfirmPassword?.touched || reactiveFormModel.errors?.['misMatch'] ">
       <small class="text-danger" *ngIf="getConfirmPassword?.errors?.['required']">Password is required</small>
       <small class="text-danger" *ngIf="getConfirmPassword?.errors?.['minlength']">min length must be of 8 characters</small>
+      <small class="text-danger" *ngIf="reactiveFormModel.errors?.['misMatch']"> Passwords do not match</small>
     </div>
   </div>
 
